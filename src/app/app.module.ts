@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BallSelectorComponent } from './ball-selector/ball-selector.component';
+import { BetSplitComponent } from './bet-split/bet-split.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BallSelectorComponent,
+    BetSplitComponent
   ],
   imports: [
     BrowserModule,
