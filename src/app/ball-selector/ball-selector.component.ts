@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApostarService } from '../servicios/apostar.service';
 
 @Component({
   selector: 'app-ball-selector',
@@ -9,9 +10,15 @@ export class BallSelectorComponent implements OnInit {
 
   maxNumber: Array<number> = new Array(10);
 
-  constructor() { }
+  constructor(
+    private apostarSvc: ApostarService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  agregar(numero: number) {
+    this.apostarSvc.agregarValor(numero);
   }
 
 }

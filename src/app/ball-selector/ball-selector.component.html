@@ -4,7 +4,7 @@
 
   <div class="container-numbers">
 
-    <div class="number" *ngFor="let i of maxNumber; let pos = index;">
+    <div class="number" (click)="agregar(pos + 1)" *ngFor="let i of maxNumber; let pos = index;">
       <span>{{ pos + 1 }}</span>
     </div>
 

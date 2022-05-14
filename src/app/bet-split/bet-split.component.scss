@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     .number {
-      background-color: aquamarine;
+      background-color: #e3e3e3;
       width: 30px;
       height: 30px;
       margin: 5px;
@@ -14,19 +14,31 @@
     }
   }
   .container-inputs {
-    margin-top: 10px;
-    justify-content: center;
+    margin: 40px 0px;
+    align-items: center;
+    flex-direction: column;
     display: flex;
     .group-input {
+      .sub-contain {
       display: flex;
-      .content {
-        background-color: rgb(143, 143, 143);
-        font-size: 20px;
+        .content {
+          background-color: #8f8f8f;
+          font-size: 20px;
+          padding: 5px;
+          cursor: pointer;
+        }
       }
+    }
+    .message-invalid {
+      color: #de1414;
     }
   }
 }
 .container-tot {
+  .total {
+    text-align: center;
+    font-size: 18px;
+  }
   .btn-jugar {
     width: 100%;
     padding: 10px;

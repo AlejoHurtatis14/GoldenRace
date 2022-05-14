@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApostarService } from '../servicios/apostar.service';
 
 @Component({
   selector: 'app-bet-split',
@@ -7,11 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BetSplitComponent implements OnInit {
 
-  maxNumber: Array<number> = new Array(8);
+  form!: FormGroup;
+  maxNumApostar = 8;
+  maxNumber: Array<number> = [];
+  numMultiplicar: number = 1;
 
-  constructor() { }
+  constructor(
+    private formBuild: FormBuilder,
+    public apostarSvc: ApostarService
+  ) { }
 
   ngOnInit(): void {
+    this.form = this.formBuild.group({
+      valorApostar: ['', [Validators.required]]
+    });
+
+    this.apostarSvc.obtenerNumeros().subscribe((selecteds: Array<number>) => {
+      if (selecteds.length <= this.maxNumApostar) {
+        this.maxNumber = [...selecteds];
+        for (let i = this.maxNumber.length; i < this.maxNumApostar; i++) this.maxNumber.push(0);
+      }
+    });
+  }
+
+  multiplicarValor() {
+    this.numMultiplicar++;
+    let valor = this.form.get('valorApostar')?.value * this.numMultiplicar;
+    this.apostarSvc.valorApostar = valor;
+  }
+
+  jugar() {
+    if (this.form.valid) {
+      this.multiplicarValor();
+    }
   }
 
 }

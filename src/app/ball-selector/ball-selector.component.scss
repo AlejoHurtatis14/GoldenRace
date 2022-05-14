@@ -2,8 +2,9 @@
   .container-numbers {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     .number {
-      background-color: aquamarine;
+      background-color: #e3e3e3;
       width: 60px;
       height: 60px;
       margin: 5px;

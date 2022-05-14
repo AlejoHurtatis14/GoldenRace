@@ -3,7 +3,7 @@
   <div class="container-numbers">
 
     <div class="number" *ngFor="let i of maxNumber; let pos = index;">
-      <span>{{ pos + 1 }}</span>
+      <span>{{ i > 0 ? i : '' }}</span>
     </div>
 
   </div>
@@ -11,10 +11,17 @@
   <div class="container-inputs">
 
     <div class="group-input">
-      <div class="content">
-        5x
+      <div class="sub-contain">
+        <div class="content" (click)="multiplicarValor()">
+          {{ numMultiplicar }}x
+        </div>
+        <input type="text">
       </div>
-      <input type="text">
+    </div>
+
+    <div *ngIf="form.get('valorApostar')?.dirty && form.get('valorApostar')?.invalid" class="message-invalid">
+      Valor mayor a 5€ <br />
+      Escribir solo números
     </div>
 
   </div>
@@ -23,7 +30,7 @@
 
 <div class="container-tot">
   <div class="total">
-    Total: $ 100
+    Total: {{ apostarSvc.valorApostar }}€
   </div>
 
   <button class="btn-jugar">
