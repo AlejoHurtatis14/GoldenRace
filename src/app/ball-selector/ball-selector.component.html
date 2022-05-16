@@ -1,13 +1,46 @@
-<div class="container-principal">
+<div class="container-principal" *ngIf="verResultado == ''">
 
   <h3>Números:</h3>
 
   <div class="container-numbers">
 
-    <div class="number" (click)="agregar(pos + 1)" *ngFor="let i of maxNumber; let pos = index;">
+    <div [ngStyle]="{'background-color': buscarColor(pos + 1) }" class="number" (click)="agregar(pos + 1)"
+      *ngFor="let i of maxNumber; let pos = index;">
       <span>{{ pos + 1 }}</span>
     </div>
 
   </div>
+
+  <div class="container-limpiar">
+    <button (click)="reiniciarJuego()" class="btn-reiniciar limpiar">
+      Limpiar
+    </button>
+  </div>
+
+</div>
+
+<div class="container-principal" [ngSwitch]="verResultado">
+
+  <h3 *ngIf="verResultado != ''" class="title-resultado">Resultado</h3>
+
+  <div class="container-numbers">
+
+    <div [ngStyle]="{'background-color': i.color }" class="number" *ngFor="let i of apostarSvc.ganador;">
+      <span>{{ i.numero > 0 ? i.numero: '' }}</span>
+    </div>
+
+  </div>
+
+  <div class="message-result message-win" *ngSwitchCase="'G'">
+    Ganaste {{ apostarSvc.valorApostar }}€
+  </div>
+
+  <div class="message-result message-lose" *ngSwitchCase="'P'">
+    Vuelve a intentarlo
+  </div>
+
+  <button (click)="reiniciarJuego()" *ngIf="verResultado != ''" class="btn-reiniciar">
+    Reiniciar
+  </button>
 
 </div>

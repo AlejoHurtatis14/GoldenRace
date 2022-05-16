@@ -20,7 +20,7 @@
     display: flex;
     .group-input {
       .sub-contain {
-      display: flex;
+        display: flex;
         .content {
           background-color: #8f8f8f;
           font-size: 20px;
@@ -28,9 +28,13 @@
           cursor: pointer;
         }
       }
-    }
-    .message-invalid {
-      color: #de1414;
+      .errors {
+        display: flex;
+        flex-direction: column;
+        .mensaje-error {
+          color: #de1414;
+        }
+      }
     }
   }
 }
@@ -39,12 +43,17 @@
     text-align: center;
     font-size: 18px;
   }
-  .btn-jugar {
+  button {
     width: 100%;
     padding: 10px;
     color: #ffffff;
     border-radius: 5px;
     background-color: #339de9;
     border: none;
+    cursor: pointer;
+  }
+  .btn-jugar[disabled] {
+    cursor: no-drop;
+    opacity: 0.7;
   }
 }

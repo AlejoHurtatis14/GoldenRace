@@ -2,8 +2,9 @@
 
   <div class="container-numbers">
 
-    <div class="number" *ngFor="let i of maxNumber; let pos = index;">
-      <span>{{ i > 0 ? i : '' }}</span>
+    <div [ngStyle]="{'background-color': it.color != '' ? it.color : '#e3e3e3'}" class="number"
+      *ngFor="let it of maxNumber; let pos = index;">
+      <span>{{ it.numero > 0 ? it.numero : '' }}</span>
     </div>
 
   </div>
@@ -11,19 +12,26 @@
   <div class="container-inputs">
 
     <div class="group-input">
-      <div class="sub-contain">
-        <div class="content" (click)="multiplicarValor()">
-          {{ numMultiplicar }}x
+      <form [formGroup]="formulario">
+        <div class="sub-contain">
+          <div class="content" (click)="multiplicarValor(true)">
+            {{ numMultiplicar }}x
+          </div>
+          <input formControlName="valorApostar" type="text">
         </div>
-        <input type="text">
-      </div>
+        <div class="errors">
+          <em class="mensaje-error" *ngIf="validarError() && formulario.get('valorApostar')?.hasError('required')">
+            {{ formulario.get('valorApostar')?.getError('required')['message'] }}
+          </em>
+          <em class="mensaje-error" *ngIf="validarError() && formulario.get('valorApostar')?.hasError('numeric')">
+            {{ formulario.get('valorApostar')?.getError('numeric')['message'] }}
+          </em>
+          <em class="mensaje-error" *ngIf="validarError() && formulario.get('valorApostar')?.hasError('minNumber')">
+            {{ formulario.get('valorApostar')?.getError('minNumber')['message'] }}
+          </em>
+        </div>
+      </form>
     </div>
-
-    <div *ngIf="form.get('valorApostar')?.dirty && form.get('valorApostar')?.invalid" class="message-invalid">
-      Valor mayor a 5€ <br />
-      Escribir solo números
-    </div>
-
   </div>
 
 </div>
@@ -33,7 +41,8 @@
     Total: {{ apostarSvc.valorApostar }}€
   </div>
 
-  <button class="btn-jugar">
+  <button [disabled]="(formulario.invalid || !apostarSvc.numerosApostar.length) || (apostarSvc.ganador.length)"
+    (click)="jugar()" class="btn-jugar">
     Jugar
   </button>
 
