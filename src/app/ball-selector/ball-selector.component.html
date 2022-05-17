@@ -1,4 +1,4 @@
-<div class="container-principal" *ngIf="verResultado == ''">
+<div class="container-principal" *ngIf="verResultado === ''">
 
   <h3>Números:</h3>
 
@@ -21,7 +21,7 @@
 
 <div class="container-principal" [ngSwitch]="verResultado">
 
-  <h3 *ngIf="verResultado != ''" class="title-resultado">Resultado</h3>
+  <h2 *ngIf="verResultado !== ''" class="title-resultado">Resultado</h2>
 
   <div class="container-numbers">
 
@@ -39,8 +39,10 @@
     Vuelve a intentarlo
   </div>
 
-  <button (click)="reiniciarJuego()" *ngIf="verResultado != ''" class="btn-reiniciar">
-    Reiniciar
-  </button>
+  <div class="btn-content-reiniciar">
+    <button (click)="reiniciarJuego()" *ngIf="verResultado !== ''" class="btn-reiniciar">
+      Reiniciar
+    </button>
+  </div>
 
 </div>

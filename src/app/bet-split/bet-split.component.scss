@@ -2,10 +2,11 @@
   .container-numbers {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     .number {
       background-color: #e3e3e3;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       margin: 5px;
       border-radius: 50%;
       display: flex;
@@ -14,7 +15,7 @@
     }
   }
   .container-inputs {
-    margin: 40px 0px;
+    margin: 20px 0px;
     align-items: center;
     flex-direction: column;
     display: flex;
@@ -22,10 +23,16 @@
       .sub-contain {
         display: flex;
         .content {
-          background-color: #8f8f8f;
+          background-color: #c1c1c1;
           font-size: 20px;
           padding: 5px;
           cursor: pointer;
+          border-radius: 5px 0px 0px 5px;
+        }
+        input {
+          border-color: #c1c1c1;
+          border-left: none;
+          border-radius: 0px 5px 5px 0px;
         }
       }
       .errors {
@@ -41,19 +48,32 @@
 .container-tot {
   .total {
     text-align: center;
-    font-size: 18px;
+    margin-bottom: 20px;
   }
-  button {
-    width: 100%;
-    padding: 10px;
-    color: #ffffff;
-    border-radius: 5px;
-    background-color: #339de9;
-    border: none;
-    cursor: pointer;
-  }
-  .btn-jugar[disabled] {
-    cursor: no-drop;
-    opacity: 0.7;
+  .btn-content-jugar {
+    text-align: center;
+    button {
+      width: 50%;
+      padding: 10px;
+      color: #ffffff;
+      border-radius: 5px;
+      background-color: #3d8bfd;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        transition: background-color 0.3s;
+        background-color: #0a58ca;
+      }
+    }
+    @media screen and (min-width: 768px) {
+      button {
+        width: 100%;
+      }
+    }
+    .btn-jugar[disabled] {
+      cursor: no-drop;
+      opacity: 0.7;
+    }
   }
 }

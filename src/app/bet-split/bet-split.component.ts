@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray } from '@angular/forms';
-import { RxFormBuilder, RxFormGroup, RxwebValidators } from '@rxweb/reactive-form-validators';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApostarService, arrayData } from '../servicios/apostar.service';
 
 @Component({
@@ -10,21 +9,21 @@ import { ApostarService, arrayData } from '../servicios/apostar.service';
 })
 export class BetSplitComponent implements OnInit {
 
-  formulario: RxFormGroup;
+  formulario: FormGroup;
   maxNumber: Array<arrayData> = [];
   numMultiplicar: number = 1;
 
   constructor(
-    private formBuild: RxFormBuilder,
+    private formBuild: FormBuilder,
     public apostarSvc: ApostarService
   ) {
-    this.formulario = <RxFormGroup>this.formBuild.group({
+    this.formulario = this.formBuild.group({
       valorApostar: ['', [
-        RxwebValidators.required({ message: 'Este campo es requerido' }),
-        RxwebValidators.numeric({ message: 'Solo valores númericos', allowDecimal: false }),
-        RxwebValidators.minNumber({ message: 'Solo valores mayores o iguales a 5', value: 5 }),
+        Validators.required, Validators.min(5), Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')
       ]]
     });
+
+    console.log(this.formulario.get('valorApostar'))
   }
 
   ngOnInit(): void {
@@ -41,7 +40,9 @@ export class BetSplitComponent implements OnInit {
     });
 
     this.formulario.get('valorApostar')?.valueChanges.subscribe(resp => {
-      this.multiplicarValor();
+      if (!isNaN(+resp)) {
+        this.multiplicarValor();
+      }
     });
   }
 

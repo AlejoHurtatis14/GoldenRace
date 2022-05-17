@@ -27,13 +27,20 @@ export class BallSelectorComponent implements OnInit {
 
   agregar(numero: number) {
 
-    if (this.apostarSvc.maxNumApostar == this.apostarSvc.numerosApostar.length) return
+    if (this.apostarSvc.maxNumApostar == this.apostarSvc.numerosApostar.length) {
+      alert("Ya tiene el maximo de números elegido");
+      return
+    }
 
     let enc = this.apostarSvc.numerosApostar.find(it => it.numero == numero);
-    let datos: arrayData = {
-      numero, color: enc ? enc.color : this.generateRandomColor()
-    };
-    this.apostarSvc.agregarValor(datos);
+    if (!enc) {
+      let datos: arrayData = {
+        numero, color: this.generateRandomColor()
+      };
+      this.apostarSvc.agregarValor(datos);
+    } else {
+      alert("El número ya ha sido elegido");
+    }
   }
 
   generateRandomColor() {
