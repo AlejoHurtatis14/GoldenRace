@@ -32,7 +32,7 @@
   </div>
 
   <div class="message-result message-win" *ngSwitchCase="'G'">
-    Ganaste {{ apostarSvc.valorApostar }}€
+    Ganaste {{ apostarSvc.valorApostar + (apostarSvc.valorApostar * (apostarSvc.ganancia / 100)) }}€
   </div>
 
   <div class="message-result message-lose" *ngSwitchCase="'P'">

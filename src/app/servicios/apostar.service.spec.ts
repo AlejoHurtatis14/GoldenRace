@@ -30,4 +30,8 @@ describe('ApostarService', () => {
     expect(service.numerosApostar.length).toBeGreaterThanOrEqual(0);
   });
 
+  it('"ganancia" number is equal to 1.5', () => {
+    expect(service.ganancia).toEqual(1.5);
+  });
+
 });

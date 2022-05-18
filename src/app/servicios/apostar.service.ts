@@ -18,6 +18,7 @@ export class ApostarService {
   private disparador = new BehaviorSubject<Array<arrayData>>([]);
   private dispararGanador = new BehaviorSubject<Array<arrayData>>([]);
   valorApostar: number = 0;
+  ganancia: number = 1.5;
 
   constructor() { }
 
